@@ -6,10 +6,8 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.os.Handler;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
-import android.view.View;
 import com.example.headsup.R;
 import com.example.headsup.categories.Category;
 import com.example.headsup.databinding.ActivityGameRoundBinding;
@@ -17,7 +15,10 @@ import com.example.headsup.databinding.ActivityGameRoundBinding;
 public class GameRoundActivity extends AppCompatActivity implements SensorEventListener {
 
     public static final String CATEGORY = "CATEGORY";
+    public static final String GAME_ROUND_FRAG_TAG = "GAME_ROUND_FRAG_TAG";
     public static final int GAME_ROUND_ERROR = -1;
+
+    FragmentManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,40 +33,15 @@ public class GameRoundActivity extends AppCompatActivity implements SensorEventL
         Category category = (Category) bundle.get(CATEGORY);
         if (category == null) finishActivity(GAME_ROUND_ERROR);
 
-        binding.cardViewItemGameRound.setBackgroundResource(category.imageId);
-        binding.cardViewItemGameRound.setOnClickListener(view -> handleGuessFail());
-
-        binding.itemGameRound.textViewItemGameRound.setText(category.nameId);
-        binding.itemGameRound.textViewCountDownGameRound.setText("3");
-
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         sensorManager.registerListener(this,
                 sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
                 SensorManager.SENSOR_DELAY_NORMAL);
-    }
 
-    private void handleGuessFail() {
-        CardView cv = findViewById(R.id.cardViewItemGameRound);
-        CardView failCardView = findViewById(R.id.cardViewItemGameRoundFail);
-        cv.setVisibility(View.GONE);
-        failCardView.setVisibility(View.VISIBLE);
-
-        new Handler().postDelayed(() -> {
-            failCardView.setVisibility(View.GONE);
-            cv.setVisibility(View.VISIBLE);
-        }, 500);
-    }
-
-    private void handleGuessGood() {
-        CardView cv = findViewById(R.id.cardViewItemGameRound);
-        CardView goodCardView = findViewById(R.id.cardViewItemGameRoundGood);
-        cv.setVisibility(View.GONE);
-        goodCardView.setVisibility(View.VISIBLE);
-
-        new Handler().postDelayed(() -> {
-            goodCardView.setVisibility(View.GONE);
-            cv.setVisibility(View.VISIBLE);
-        }, 500);
+        manager = getSupportFragmentManager();
+        manager.beginTransaction()
+                .add(R.id.gameRoundContainer, GameRoundFragment.newInstance(category), GAME_ROUND_FRAG_TAG)
+                .commit();
     }
 
     @Override
@@ -75,7 +51,10 @@ public class GameRoundActivity extends AppCompatActivity implements SensorEventL
         //z axis: event.values[2]
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             if (event.values[0] < 3.0 && event.values[2] < -8.0) {
-                handleGuessGood();
+                GameRoundFragment grf = (GameRoundFragment) manager.findFragmentByTag(GAME_ROUND_FRAG_TAG);
+                if (grf != null) {
+                    grf.handleGuessGood();
+                }
             }
         }
     }
