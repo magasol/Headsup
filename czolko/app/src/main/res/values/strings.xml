@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Heads-up</string>
+    <string name="books">Books</string>
+    <string name="children_stories">Children Stories</string>
+    <string name="famous_people">Famous people</string>
+    <string name="songs">Songs</string>
+    <string name="movies">Movies</string>
+    <string name="fail_game_round">Fail!</string>
+    <string name="good_game_round">Good!</string>
+</resources>

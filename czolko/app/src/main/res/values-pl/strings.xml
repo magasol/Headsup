@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Czółko</string>
+    <string name="books">Książki</string>
+    <string name="children_stories">Bajki</string>
+    <string name="famous_people">Sławne osoby</string>
+    <string name="songs">Piosenki</string>
+    <string name="movies">Filmy</string>
+    <string name="fail_game_round">Źle!</string>
+    <string name="good_game_round">Dobrze!</string>
+</resources>

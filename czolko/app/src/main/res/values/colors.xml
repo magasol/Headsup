@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#62396A</color> <!-- dark pastel green -->
+    <color name="colorPrimaryDark">#400E49</color> <!-- forrest green (web) -->
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="black">#000000</color>
+    <color name="shade">#77000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_smoke">#F5F5F4</color>
+    <color name="seeThroughPurple">#CC62396A</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#18CD09</color>
+</resources>
