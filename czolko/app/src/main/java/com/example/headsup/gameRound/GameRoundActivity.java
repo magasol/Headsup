@@ -8,17 +8,20 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+
 import com.example.headsup.R;
 import com.example.headsup.categories.Category;
 import com.example.headsup.databinding.ActivityGameRoundBinding;
 
-public class GameRoundActivity extends AppCompatActivity implements SensorEventListener {
+public class GameRoundActivity extends AppCompatActivity implements SensorEventListener, GameRoundActivityListener {
 
     public static final String CATEGORY = "CATEGORY";
     public static final String GAME_ROUND_FRAG_TAG = "GAME_ROUND_FRAG_TAG";
+    public static final String GAME_ROUND_OVER_FRAG_TAG = "GAME_ROUND_OVER_FRAG_TAG";
     public static final int GAME_ROUND_ERROR = -1;
 
     FragmentManager manager;
+    Category category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +33,7 @@ public class GameRoundActivity extends AppCompatActivity implements SensorEventL
         Bundle bundle = getIntent().getExtras();
         if (bundle == null) finishActivity(GAME_ROUND_ERROR);
 
-        Category category = (Category) bundle.get(CATEGORY);
+        category = (Category) bundle.get(CATEGORY);
         if (category == null) finishActivity(GAME_ROUND_ERROR);
 
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -62,5 +65,20 @@ public class GameRoundActivity extends AppCompatActivity implements SensorEventL
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+
+    @Override
+    public void gameRoundOver(int rightAnswers, int wrongAnswers) {
+        GameRoundFragment grf = (GameRoundFragment) manager.findFragmentByTag(GAME_ROUND_FRAG_TAG);
+        if (grf != null)
+            manager.beginTransaction()
+                    .remove(grf)
+                    .commit();
+
+        manager.beginTransaction()
+                .add(R.id.gameRoundContainer,
+                        GameRoundOverFragment.newInstance(category, rightAnswers, wrongAnswers),
+                        GAME_ROUND_OVER_FRAG_TAG)
+                .commit();
     }
 }
