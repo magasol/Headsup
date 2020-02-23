@@ -12,9 +12,11 @@ import android.view.ViewGroup;
 
 import com.example.headsup.R;
 import com.example.headsup.categories.Category;
+import com.example.headsup.database.HeadsupDatabase;
 import com.example.headsup.databinding.FragmentGameRoundBinding;
 
 import java.util.Locale;
+import java.util.concurrent.Executors;
 
 public class GameRoundFragment extends Fragment {
 
@@ -76,7 +78,12 @@ public class GameRoundFragment extends Fragment {
         binding.cardViewItemGameRound.setBackgroundResource(category.imageId);
         binding.cardViewItemGameRound.setOnClickListener(v -> handleGuessFail());
 
-        binding.itemGameRound.textViewItemGameRound.setText(category.nameId);
+        HeadsupDatabase hd = HeadsupDatabase.getInstance(this.getActivity());
+        Executors.newSingleThreadExecutor().execute(()-> {
+            String tmp = hd.guessDao().getAllByCategory(1).get(2).name;
+            binding.itemGameRound.textViewItemGameRound.setText(tmp);
+        });
+
     }
 
     @Override
