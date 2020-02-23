@@ -1,14 +1,15 @@
 package com.example.headsup.gameRound;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 
 import com.example.headsup.R;
 import com.example.headsup.categories.Category;
@@ -49,7 +50,7 @@ public class GameRoundFragment extends Fragment {
         }
     };
 
-    public static GameRoundFragment newInstance(Category category) {
+    static GameRoundFragment newInstance(Category category) {
         GameRoundFragment grf = new GameRoundFragment();
         Bundle bundle = new Bundle(1);
         bundle.putSerializable("category", category);

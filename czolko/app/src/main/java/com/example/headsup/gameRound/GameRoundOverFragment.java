@@ -1,12 +1,13 @@
 package com.example.headsup.gameRound;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 
 import com.example.headsup.R;
 import com.example.headsup.categories.Category;
@@ -14,8 +15,8 @@ import com.example.headsup.databinding.FragmentGameRoundOverBinding;
 
 public class GameRoundOverFragment extends Fragment {
 
-    public static final int RIGHT_ANSWER_POINTS = 3;
-    public static final int WRONG_ANSWER_POINTS = -1;
+    private static final int RIGHT_ANSWER_POINTS = 3;
+    private static final int WRONG_ANSWER_POINTS = -1;
 
     private FragmentGameRoundOverBinding binding;
     private Category category;
