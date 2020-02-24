@@ -9,4 +9,5 @@
     <dimen name="text_size_card_view_M">30sp</dimen>
     <dimen name="text_size_card_view_L">40sp</dimen>
     <dimen name="margin_S">15dp</dimen>
+    <dimen name="margin_M">25dp</dimen>
 </resources>

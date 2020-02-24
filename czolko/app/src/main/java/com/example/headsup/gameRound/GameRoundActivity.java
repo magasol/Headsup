@@ -18,6 +18,7 @@ import com.example.headsup.databinding.ActivityGameRoundBinding;
 public class GameRoundActivity extends AppCompatActivity implements SensorEventListener, GameRoundActivityListener {
 
     public static final String CATEGORY = "CATEGORY";
+    public static final String GAME_ROUND_START_FRAG_TAG = "GAME_ROUND_START_FRAG_TAG";
     public static final String GAME_ROUND_FRAG_TAG = "GAME_ROUND_FRAG_TAG";
     public static final String GAME_ROUND_OVER_FRAG_TAG = "GAME_ROUND_OVER_FRAG_TAG";
     public static final int GAME_ROUND_ERROR = -1;
@@ -52,7 +53,7 @@ public class GameRoundActivity extends AppCompatActivity implements SensorEventL
 
         manager = getSupportFragmentManager();
         manager.beginTransaction()
-                .add(R.id.gameRoundContainer, GameRoundFragment.newInstance(category), GAME_ROUND_FRAG_TAG)
+                .add(R.id.gameRoundContainer, GameRoundStartFragment.newInstance(category), GAME_ROUND_START_FRAG_TAG)
                 .commit();
     }
 
@@ -92,6 +93,20 @@ public class GameRoundActivity extends AppCompatActivity implements SensorEventL
                         GAME_ROUND_OVER_FRAG_TAG)
                 .commit();
     }
+
+    @Override
+    public void startGameRound(int roundTime) {
+        GameRoundStartFragment grf = (GameRoundStartFragment) manager.findFragmentByTag(GAME_ROUND_START_FRAG_TAG);
+        if (grf != null)
+            manager.beginTransaction()
+                    .remove(grf)
+                    .commit();
+
+        manager.beginTransaction()
+                .add(R.id.gameRoundContainer, GameRoundFragment.newInstance(category, roundTime), GAME_ROUND_FRAG_TAG)
+                .commit();
+    }
+
 
     private void hideNavigationBar() {
         View decorView = getWindow().getDecorView();

@@ -1,5 +1,7 @@
 package com.example.headsup.gameRound;
 
+//timer implementation https://stackoverflow.com/questions/4597690/how-to-set-timer-in-android
+
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,8 +26,6 @@ import java.util.concurrent.Executors;
 
 public class GameRoundFragment extends Fragment {
 
-    private static final int GAME_ROUND_TIME = 61;
-
     private FragmentGameRoundBinding binding;
     private Category category;
     private GameRoundActivityListener gameRoundActivityListener;
@@ -35,12 +35,13 @@ public class GameRoundFragment extends Fragment {
     private int rightAnswers = 0;
     private int wrongAnswers = 0;
 
+    private int gameRoundTime;
     private long startTime = 0;
     private Handler timerHandler = new Handler();
     private Runnable timerRunnable = new Runnable() {
         @Override
         public void run() {
-            long millis = GAME_ROUND_TIME * 1000 - (System.currentTimeMillis() - startTime);
+            long millis = gameRoundTime * 1000 - (System.currentTimeMillis() - startTime);
             int seconds = (int) (millis / 1000);
             int minutes = seconds / 60;
             seconds = seconds % 60;
@@ -55,10 +56,11 @@ public class GameRoundFragment extends Fragment {
         }
     };
 
-    static GameRoundFragment newInstance(Category category) {
+    static GameRoundFragment newInstance(Category category, int gameRoundTime) {
         GameRoundFragment grf = new GameRoundFragment();
-        Bundle bundle = new Bundle(1);
+        Bundle bundle = new Bundle(2);
         bundle.putSerializable("category", category);
+        bundle.putSerializable("gameRoundTime", gameRoundTime);
         grf.setArguments(bundle);
         return grf;
     }
@@ -71,10 +73,12 @@ public class GameRoundFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        if (getArguments() != null)
+        if (getArguments() != null) {
             category = (Category) getArguments().getSerializable("category");
-        else
+            gameRoundTime = getArguments().getInt("gameRoundTime");
+        } else {
             gameOver();
+        }
 
         binding = DataBindingUtil
                 .inflate(inflater, R.layout.fragment_game_round, parent, false);

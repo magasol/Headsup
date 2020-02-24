@@ -12,4 +12,7 @@
     <string name="points_game_over">Points:</string>
     <string name="fail_game_over">Fail:</string>
     <string name="good_game_over">Good:</string>
+    <string name="time45s" translatable="false">45 s</string>
+    <string name="time60s" translatable="false">60 s</string>
+    <string name="time90s" translatable="false">90 s</string>
 </resources>

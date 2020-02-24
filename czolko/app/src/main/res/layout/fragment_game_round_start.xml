@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewItemGameRoundStart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/card_view_margin"
+            android:fontFamily="@font/bungee_regular"
+            card_view:cardCornerRadius="@dimen/card_view_radius">
+
+            <LinearLayout
+                android:background="@color/seeThroughPurple"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="5"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/blankGameRoundStart1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <RadioGroup
+                    android:id="@+id/roundTimeRadioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/roundTime45"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_margin="@dimen/margin_S"
+                        android:text="@string/time45s"
+                        android:textColor="@color/white" />
+
+                    <RadioButton
+                        android:id="@+id/roundTime60"
+                        android:checked="true"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_margin="@dimen/margin_S"
+                        android:text="@string/time60s"
+                        android:textColor="@color/white" />
+
+                    <RadioButton
+                        android:id="@+id/roundTime90"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_margin="@dimen/margin_S"
+                        android:text="@string/time90s"
+                        android:textColor="@color/white" />
+
+                </RadioGroup>
+
+                <FrameLayout
+                    android:id="@+id/blankGameRoundStart2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <!-- TODO OVERRIDE BELO 23 VERSION HEN RADIO BUTTON CUSTOMED -->
+                <Button
+                    android:id="@+id/buttonNextGameRoundStart"
+                    android:background="@drawable/button_next"
+                    android:foreground="@drawable/ic_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
