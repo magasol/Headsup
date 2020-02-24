@@ -24,6 +24,8 @@ public class GameRoundActivity extends AppCompatActivity implements SensorEventL
     FragmentManager manager;
     Category category;
 
+    boolean readyForGoodGuess = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,12 +56,15 @@ public class GameRoundActivity extends AppCompatActivity implements SensorEventL
         //y axis: event.values[1]
         //z axis: event.values[2]
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            if (event.values[0] < 3.0 && event.values[2] < -8.0) {
+            if (event.values[0] < 3.0 && event.values[2] < -8.0 && readyForGoodGuess) {
+                readyForGoodGuess = false;
                 GameRoundFragment grf = (GameRoundFragment) manager.findFragmentByTag(GAME_ROUND_FRAG_TAG);
                 if (grf != null) {
                     grf.handleGuessGood();
                 }
             }
+            else if (event.values[0] >8.0 && event.values[2] > -3.0)
+                readyForGoodGuess = true;
         }
     }
 

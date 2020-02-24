@@ -13,20 +13,24 @@ import androidx.fragment.app.Fragment;
 
 import com.example.headsup.R;
 import com.example.headsup.categories.Category;
+import com.example.headsup.database.Guess;
 import com.example.headsup.database.HeadsupDatabase;
 import com.example.headsup.databinding.FragmentGameRoundBinding;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Executors;
 
 public class GameRoundFragment extends Fragment {
 
-    private static final int GAME_ROUND_TIME = 11;
+    private static final int GAME_ROUND_TIME = 61;
 
     private FragmentGameRoundBinding binding;
     private Category category;
     private GameRoundActivityListener gameRoundActivityListener;
 
+    private List<Guess> guesses;
+    private int guessIndex = 0;
     private int rightAnswers = 0;
     private int wrongAnswers = 0;
 
@@ -45,7 +49,7 @@ public class GameRoundFragment extends Fragment {
                         .setText(String.format(Locale.getDefault(), "%d:%02d", minutes, seconds));
                 timerHandler.postDelayed(this, 500);
             } else {
-                gameRoundActivityListener.gameRoundOver(rightAnswers, wrongAnswers);
+                gameOver();
             }
         }
     };
@@ -68,6 +72,8 @@ public class GameRoundFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         if (getArguments() != null)
             category = (Category) getArguments().getSerializable("category");
+        else
+            gameOver();
 
         binding = DataBindingUtil
                 .inflate(inflater, R.layout.fragment_game_round, parent, false);
@@ -79,12 +85,7 @@ public class GameRoundFragment extends Fragment {
         binding.cardViewItemGameRound.setBackgroundResource(category.imageId);
         binding.cardViewItemGameRound.setOnClickListener(v -> handleGuessFail());
 
-        HeadsupDatabase hd = HeadsupDatabase.getInstance(this.getActivity());
-        Executors.newSingleThreadExecutor().execute(()-> {
-            String tmp = hd.guessDao().getAllByCategory(1).get(2).name;
-            binding.itemGameRound.textViewItemGameRound.setText(tmp);
-        });
-
+        loadNewGuessesList();
     }
 
     @Override
@@ -109,6 +110,7 @@ public class GameRoundFragment extends Fragment {
         new Handler().postDelayed(() -> {
             binding.cardViewItemGameRoundGood.setVisibility(View.GONE);
             binding.cardViewItemGameRound.setVisibility(View.VISIBLE);
+            loadNewGuess();
         }, 600);
     }
 
@@ -121,6 +123,29 @@ public class GameRoundFragment extends Fragment {
         new Handler().postDelayed(() -> {
             binding.cardViewItemGameRoundFail.setVisibility(View.GONE);
             binding.cardViewItemGameRound.setVisibility(View.VISIBLE);
+            loadNewGuess();
         }, 600);
+    }
+
+    private void loadNewGuessesList() {
+        HeadsupDatabase hd = HeadsupDatabase.getInstance(this.getActivity());
+        Executors.newSingleThreadExecutor().execute(() -> {
+            guesses = hd.guessDao().getRandomByCategory(getString(category.nameId));
+            if (guesses == null)
+                gameOver();
+            loadNewGuess();
+        });
+    }
+
+    private void loadNewGuess() {
+        if (guessIndex == guesses.size())
+            gameOver();
+        String guessName = guesses.get(guessIndex).name;
+        guessIndex++;
+        binding.itemGameRound.textViewItemGameRound.setText(guessName);
+    }
+
+    private void gameOver() {
+        gameRoundActivityListener.gameRoundOver(rightAnswers, wrongAnswers);
     }
 }

@@ -9,8 +9,11 @@ import java.util.List;
 
 @Dao
 public interface GuessDao {
-    @Query("SELECT * FROM GUESS WHERE CATEGORY_ID=:categoryId")
-    List<Guess> getAllByCategory(Integer categoryId);
+    @Query("SELECT GUESS.ID, GUESS.NAME, GUESS.CATEGORY_ID " +
+            "FROM GUESS JOIN CATEGORY ON CATEGORY.ID = GUESS.CATEGORY_ID " +
+            "WHERE CATEGORY.NAME=:categoryName " +
+            "ORDER BY RANDOM() LIMIT 30")
+    List<Guess> getRandomByCategory(String categoryName);
 
     @Insert
     void insertAll(Guess... guesses);
