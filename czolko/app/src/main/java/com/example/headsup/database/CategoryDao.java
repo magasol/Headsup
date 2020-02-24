@@ -9,12 +9,12 @@ import java.util.List;
 
 @Dao
 public interface CategoryDao {
-    @Query("SELECT * FROM category")
+    @Query("SELECT * FROM CATEGORY")
     List<Category> getAll();
 
     @Insert
-    void insertAll(Guess... guesses);
+    void insertAll(Category... categories);
 
     @Delete
-    void delete(Guess guess);
+    void delete(Category category);
 }

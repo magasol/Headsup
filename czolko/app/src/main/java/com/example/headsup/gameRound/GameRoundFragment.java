@@ -12,7 +12,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.example.headsup.R;
-import com.example.headsup.categories.Category;
+import com.example.headsup.database.Category;
 import com.example.headsup.database.Guess;
 import com.example.headsup.database.HeadsupDatabase;
 import com.example.headsup.databinding.FragmentGameRoundBinding;
@@ -134,7 +134,7 @@ public class GameRoundFragment extends Fragment {
     private void loadNewGuessesList() {
         HeadsupDatabase hd = HeadsupDatabase.getInstance(this.getActivity());
         Executors.newSingleThreadExecutor().execute(() -> {
-            guesses = hd.guessDao().getRandomByCategory(getString(category.nameId));
+            guesses = hd.guessDao().getRandomByCategory(category.name);
             if (guesses == null)
                 gameOver();
             loadNewGuess();

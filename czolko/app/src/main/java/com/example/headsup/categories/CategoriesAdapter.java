@@ -17,6 +17,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.headsup.R;
 import com.example.headsup.categories.CategoriesAdapter.CategoriesViewHolder;
+import com.example.headsup.database.Category;
 import com.example.headsup.gameRound.GameRoundActivity;
 
 import java.util.List;
@@ -54,7 +55,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesViewHolder
     @Override
     public void onBindViewHolder(@NonNull final CategoriesViewHolder holder, int position) {
         Category category = categoriesList.get(position);
-        holder.name.setText(category.nameId);
+        holder.name.setText(category.name);
 
         int imageId = mContext
                 .getResources()

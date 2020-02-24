@@ -12,7 +12,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.headsup.R;
-import com.example.headsup.categories.Category;
+import com.example.headsup.database.Category;
 import com.example.headsup.databinding.ActivityGameRoundBinding;
 
 public class GameRoundActivity extends AppCompatActivity implements SensorEventListener, GameRoundActivityListener {
