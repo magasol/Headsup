@@ -11,6 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/card_view_margin"
+            android:fontFamily="@font/bungee_regular"
             card_view:cardCornerRadius="@dimen/card_view_radius">
 
             <LinearLayout
@@ -20,17 +21,17 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin_S"
+                    android:fontFamily="@font/bungee_regular"
                     android:text="@string/game_over"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_card_view_L" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:orientation="horizontal">
 
@@ -39,26 +40,28 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/margin_S"
+                        android:fontFamily="@font/bungee_regular"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_card_view" />
+                        android:textSize="@dimen/text_size_card_view_S" />
 
                     <TextView
                         android:id="@+id/textViewWrongAnswers"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/bungee_regular"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_card_view" />
+                        android:textSize="@dimen/text_size_card_view_S" />
 
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/textViewPoints"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/bungee_regular"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_card_view" />
+                    android:textSize="@dimen/text_size_card_view_S" />
 
             </LinearLayout>
 

@@ -24,11 +24,12 @@
                         android:id="@+id/TextViewItemCategory"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/card_view_padding"
+                        android:paddingStart="@dimen/card_view_padding"
+                        android:paddingEnd="@dimen/card_view_padding"
                         android:background="@color/shade"
                         android:textColor="@color/white"
-                        android:fontFamily="@font/snowblobs"
-                        android:textSize="@dimen/text_size_card_view" />
+                        android:fontFamily="@font/bungee_regular"
+                        android:textSize="@dimen/text_size_card_view_S" />
 
                 </LinearLayout>
 

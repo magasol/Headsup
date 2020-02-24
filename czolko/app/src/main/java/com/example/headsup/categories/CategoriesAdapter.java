@@ -55,9 +55,13 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesViewHolder
     public void onBindViewHolder(@NonNull final CategoriesViewHolder holder, int position) {
         Category category = categoriesList.get(position);
         holder.name.setText(category.nameId);
+
+        int imageId = mContext
+                .getResources()
+                .getIdentifier(category.imageName, "drawable", mContext.getPackageName());
         Glide
                 .with(mContext)
-                .load(category.imageId)
+                .load(imageId)
                 .into(new SimpleTarget<Drawable>() {
                     @Override
                     public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {

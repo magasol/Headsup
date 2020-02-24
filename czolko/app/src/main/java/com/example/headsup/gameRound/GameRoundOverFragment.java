@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.example.headsup.R;
-import com.example.headsup.categories.Category;
 import com.example.headsup.databinding.FragmentGameRoundOverBinding;
 
 public class GameRoundOverFragment extends Fragment {
@@ -19,14 +18,12 @@ public class GameRoundOverFragment extends Fragment {
     private static final int WRONG_ANSWER_POINTS = -1;
 
     private FragmentGameRoundOverBinding binding;
-    private Category category;
     private int rightAnswers;
     private int wrongAnswers;
 
-    public static GameRoundOverFragment newInstance(Category category, int rightAnswers, int wrongAnswers) {
+    public static GameRoundOverFragment newInstance(int rightAnswers, int wrongAnswers) {
         GameRoundOverFragment grf = new GameRoundOverFragment();
-        Bundle bundle = new Bundle(3);
-        bundle.putSerializable("category", category);
+        Bundle bundle = new Bundle(2);
         bundle.putInt("rightAnswers", rightAnswers);
         bundle.putInt("wrongAnswers", wrongAnswers);
         grf.setArguments(bundle);
@@ -36,7 +33,6 @@ public class GameRoundOverFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         if (getArguments() != null) {
-            category = (Category) getArguments().getSerializable("category");
             rightAnswers = getArguments().getInt("rightAnswers");
             wrongAnswers = getArguments().getInt("wrongAnswers");
         }
@@ -48,7 +44,7 @@ public class GameRoundOverFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        binding.cardViewItemGameRoundOver.setBackgroundResource(category.imageId);
+        binding.cardViewItemGameRoundOver.setBackgroundResource(R.drawable.applause);
         binding.textViewRightAnswers
                 .setText(String.format("%s %s", getString(R.string.good_game_over), String.valueOf(rightAnswers)));
         binding.textViewWrongAnswers

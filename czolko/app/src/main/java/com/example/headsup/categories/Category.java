@@ -5,10 +5,10 @@ import java.io.Serializable;
 public class Category implements Serializable {
 
     public int nameId;
-    public int imageId;
+    public String imageName;
 
-    Category(int nameId, int imageId) {
+    Category(int nameId, String imageName) {
         this.nameId = nameId;
-        this.imageId = imageId;
+        this.imageName = imageName;
     }
 }

@@ -10,7 +10,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_margin="@dimen/margin_S">
 
                 <TextView
                     android:id="@+id/textViewItemGameRound"
@@ -26,7 +27,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_margin="@dimen/margin_S">
 
                 <TextView
                     android:id="@+id/textViewCountDownGameRound"
@@ -35,7 +37,7 @@
                     android:layout_gravity="top"
                     android:textAlignment="center"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_card_view_L" />
+                    android:textSize="@dimen/text_size_card_view_M" />
 
         </LinearLayout>
 

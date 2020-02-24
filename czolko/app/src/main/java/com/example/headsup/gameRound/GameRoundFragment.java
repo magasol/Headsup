@@ -19,6 +19,7 @@ import com.example.headsup.databinding.FragmentGameRoundBinding;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.concurrent.Executors;
 
 public class GameRoundFragment extends Fragment {
@@ -82,7 +83,10 @@ public class GameRoundFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        binding.cardViewItemGameRound.setBackgroundResource(category.imageId);
+        int imageId = Objects.requireNonNull(getContext())
+                .getResources()
+                .getIdentifier(category.imageName, "drawable", getContext().getPackageName());
+        binding.cardViewItemGameRound.setBackgroundResource(imageId);
         binding.cardViewItemGameRound.setOnClickListener(v -> handleGuessFail());
 
         loadNewGuessesList();

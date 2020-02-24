@@ -5,6 +5,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -39,6 +40,11 @@ public class GameRoundActivity extends AppCompatActivity implements SensorEventL
         category = (Category) bundle.get(CATEGORY);
         if (category == null) finishActivity(GAME_ROUND_ERROR);
 
+        if (getSupportActionBar() != null)
+            getSupportActionBar().hide();
+
+        hideNavigationBar();
+
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         sensorManager.registerListener(this,
                 sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
@@ -62,8 +68,7 @@ public class GameRoundActivity extends AppCompatActivity implements SensorEventL
                 if (grf != null) {
                     grf.handleGuessGood();
                 }
-            }
-            else if (event.values[0] >8.0 && event.values[2] > -3.0)
+            } else if (event.values[0] > 8.0 && event.values[2] > -3.0)
                 readyForGoodGuess = true;
         }
     }
@@ -83,8 +88,19 @@ public class GameRoundActivity extends AppCompatActivity implements SensorEventL
 
         manager.beginTransaction()
                 .add(R.id.gameRoundContainer,
-                        GameRoundOverFragment.newInstance(category, rightAnswers, wrongAnswers),
+                        GameRoundOverFragment.newInstance(rightAnswers, wrongAnswers),
                         GAME_ROUND_OVER_FRAG_TAG)
                 .commit();
+    }
+
+    private void hideNavigationBar() {
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        decorView.setSystemUiVisibility(uiOptions);
     }
 }

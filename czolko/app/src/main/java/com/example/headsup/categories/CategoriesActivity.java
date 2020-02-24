@@ -35,10 +35,10 @@ public class CategoriesActivity extends AppCompatActivity {
     }
 
     private void prepareCategories() {
-        categoriesList.add(new Category(R.string.children_stories, R.drawable.children_stories));
-        categoriesList.add(new Category(R.string.famous_people, R.drawable.famous_people));
-        categoriesList.add(new Category(R.string.books, R.drawable.books));
-        categoriesList.add(new Category(R.string.songs, R.drawable.songs));
-        categoriesList.add(new Category(R.string.movies, R.drawable.movies));
+        categoriesList.add(new Category(R.string.children_stories, "children_stories"));
+        categoriesList.add(new Category(R.string.famous_people,"famous_people"));
+        categoriesList.add(new Category(R.string.books,"books"));
+        categoriesList.add(new Category(R.string.songs, "songs"));
+        categoriesList.add(new Category(R.string.movies, "movies"));
     }
 }
