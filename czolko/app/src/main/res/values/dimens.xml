@@ -9,5 +9,9 @@
     <dimen name="text_size_card_view_M">30sp</dimen>
     <dimen name="text_size_card_view_L">40sp</dimen>
     <dimen name="margin_S">15dp</dimen>
-    <dimen name="margin_M">25dp</dimen>
+    <dimen name="margin_L">35dp</dimen>
+    <dimen name="radio_button_radius">5dp</dimen>
+    <dimen name="radio_button_stroke_width">2sp</dimen>
+    <dimen name="padding_S">20dp</dimen>
+    <dimen name="padding_L">45dp</dimen>
 </resources>

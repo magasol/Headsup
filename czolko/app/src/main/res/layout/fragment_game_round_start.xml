@@ -18,65 +18,70 @@
                 android:background="@color/seeThroughPurple"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:weightSum="5"
                 android:orientation="vertical">
-
-                <FrameLayout
-                    android:id="@+id/blankGameRoundStart1"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
 
                 <RadioGroup
                     android:id="@+id/roundTimeRadioGroup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin_L"
                     android:orientation="horizontal">
 
                     <RadioButton
                         android:id="@+id/roundTime45"
+                        android:background="@drawable/r_btn_round_time_left"
+                        android:button="@android:color/transparent"
                         android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_margin="@dimen/margin_S"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:paddingVertical="@dimen/padding_S"
+                        android:fontFamily="@font/bungee_regular"
                         android:text="@string/time45s"
+                        android:textAlignment="center"
                         android:textColor="@color/white" />
 
                     <RadioButton
                         android:id="@+id/roundTime60"
+                        android:background="@drawable/r_btn_round_time_middle"
+                        android:button="@android:color/transparent"
                         android:checked="true"
                         android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_margin="@dimen/margin_S"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:paddingVertical="@dimen/padding_S"
+                        android:fontFamily="@font/bungee_regular"
                         android:text="@string/time60s"
+                        android:textAlignment="center"
                         android:textColor="@color/white" />
 
                     <RadioButton
                         android:id="@+id/roundTime90"
+                        android:background="@drawable/r_btn_round_time_right"
+                        android:button="@android:color/transparent"
                         android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_margin="@dimen/margin_S"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:paddingVertical="@dimen/padding_S"
+                        android:fontFamily="@font/bungee_regular"
                         android:text="@string/time90s"
+                        android:textAlignment="center"
                         android:textColor="@color/white" />
 
                 </RadioGroup>
 
-                <FrameLayout
-                    android:id="@+id/blankGameRoundStart2"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <!-- TODO OVERRIDE BELO 23 VERSION HEN RADIO BUTTON CUSTOMED -->
                 <Button
                     android:id="@+id/buttonNextGameRoundStart"
-                    android:background="@drawable/button_next"
-                    android:foreground="@drawable/ic_next"
+                    android:background="@drawable/btn_next"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingHorizontal="@dimen/padding_L"
+                    android:paddingVertical="@dimen/padding_S"
+                    android:layout_margin="@dimen/margin_L"
+                    android:fontFamily="@font/bungee_regular"
+                    android:text="@string/start"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
