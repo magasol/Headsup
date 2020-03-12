@@ -84,10 +84,12 @@ public class GameRoundActivity extends AppCompatActivity implements SensorEventL
         GameRoundFragment grf = (GameRoundFragment) manager.findFragmentByTag(GAME_ROUND_FRAG_TAG);
         if (grf != null)
             manager.beginTransaction()
+                    .setCustomAnimations(R.anim.slide_in_down, R.anim.slide_out_down)
                     .remove(grf)
                     .commit();
 
         manager.beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_down, R.anim.slide_out_down)
                 .add(R.id.gameRoundContainer,
                         GameRoundOverFragment.newInstance(rightAnswers, wrongAnswers),
                         GAME_ROUND_OVER_FRAG_TAG)
@@ -99,10 +101,12 @@ public class GameRoundActivity extends AppCompatActivity implements SensorEventL
         GameRoundStartFragment grf = (GameRoundStartFragment) manager.findFragmentByTag(GAME_ROUND_START_FRAG_TAG);
         if (grf != null)
             manager.beginTransaction()
+                    .setCustomAnimations(R.anim.slide_in_down, R.anim.slide_out_down)
                     .remove(grf)
                     .commit();
 
         manager.beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_down, R.anim.slide_out_down)
                 .add(R.id.gameRoundContainer, GameRoundFragment.newInstance(category, roundTime), GAME_ROUND_FRAG_TAG)
                 .commit();
     }
