@@ -1,5 +1,6 @@
 package com.example.headsup.gameRound;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,9 @@ public class GameRoundOverFragment extends Fragment {
     private int rightAnswers;
     private int wrongAnswers;
 
-    public static GameRoundOverFragment newInstance(int rightAnswers, int wrongAnswers) {
+    private MediaPlayer mp;
+
+    static GameRoundOverFragment newInstance(int rightAnswers, int wrongAnswers) {
         GameRoundOverFragment grf = new GameRoundOverFragment();
         Bundle bundle = new Bundle(2);
         bundle.putInt("rightAnswers", rightAnswers);
@@ -52,5 +55,14 @@ public class GameRoundOverFragment extends Fragment {
 
         int points = RIGHT_ANSWER_POINTS * rightAnswers + WRONG_ANSWER_POINTS * wrongAnswers;
         binding.textViewPoints.setText(String.format("%s %s", getString(R.string.points_game_over), String.valueOf(points)));
+
+        mp = MediaPlayer.create(getContext(), R.raw.applause);
+        mp.start();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mp.release();
     }
 }

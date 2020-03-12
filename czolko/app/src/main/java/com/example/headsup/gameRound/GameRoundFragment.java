@@ -3,6 +3,7 @@ package com.example.headsup.gameRound;
 //timer implementation https://stackoverflow.com/questions/4597690/how-to-set-timer-in-android
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -56,6 +57,9 @@ public class GameRoundFragment extends Fragment {
         }
     };
 
+    private MediaPlayer mpRight;
+    private MediaPlayer mpWrong;
+
     static GameRoundFragment newInstance(Category category, int gameRoundTime) {
         GameRoundFragment grf = new GameRoundFragment();
         Bundle bundle = new Bundle(2);
@@ -101,38 +105,47 @@ public class GameRoundFragment extends Fragment {
         super.onResume();
         startTime = System.currentTimeMillis();
         timerHandler.postDelayed(timerRunnable, 0);
+
+        mpRight = MediaPlayer.create(getContext(), R.raw.right);
+        mpWrong = MediaPlayer.create(getContext(), R.raw.wrong);
     }
 
     @Override
     public void onPause() {
         super.onPause();
         timerHandler.removeCallbacks(timerRunnable);
+        mpRight.release();
+        mpWrong.release();
     }
 
-    public void handleGuessGood() {
+    void handleGuessGood() {
+        Executors.newSingleThreadExecutor().execute(() -> mpRight.start());
+
         binding.cardViewItemGameRound.setVisibility(View.GONE);
         binding.cardViewItemGameRoundGood.setVisibility(View.VISIBLE);
-
-        rightAnswers++;
 
         new Handler().postDelayed(() -> {
             binding.cardViewItemGameRoundGood.setVisibility(View.GONE);
             binding.cardViewItemGameRound.setVisibility(View.VISIBLE);
             loadNewGuess();
         }, 600);
+
+        rightAnswers++;
     }
 
     private void handleGuessFail() {
+        Executors.newSingleThreadExecutor().execute(() -> mpWrong.start());
+
         binding.cardViewItemGameRound.setVisibility(View.GONE);
         binding.cardViewItemGameRoundFail.setVisibility(View.VISIBLE);
-
-        wrongAnswers++;
 
         new Handler().postDelayed(() -> {
             binding.cardViewItemGameRoundFail.setVisibility(View.GONE);
             binding.cardViewItemGameRound.setVisibility(View.VISIBLE);
             loadNewGuess();
         }, 600);
+
+        wrongAnswers++;
     }
 
     private void loadNewGuessesList() {
